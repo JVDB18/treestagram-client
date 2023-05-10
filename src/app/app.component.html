@@ -1,2 +1,42 @@
-<router-outlet></router-outlet>
-<app-add-post></app-add-post>
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+            nzWidth="256px"
+            [nzCollapsible]="false">
+    <div class="sidebar-logo">
+        <!-- <img src="../assets/pics/logo.png" alt="logo" class="logo"> -->
+        <h1>Treestagram</h1>
+    </div>
+    <div *ngIf="username"><h3>Hello {{username}}</h3></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="">Feed</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/profile/{{username}}">Profile</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Settings</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/post/add">New Post <span nz-icon nzType="plus-circle" nzTheme="outline"></span></a>
+
+          </li>
+          <li nz-menu-item nzMatchRouter *ngIf="isLoggedIn">
+            <a (click)="disconnect()">Disconnect</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter *ngIf="!isLoggedIn">
+            <a routerLink="/auth/signin">Log In</a>
+          </li>
+        </ul>
+
+  </nz-sider>
+  <nz-layout>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

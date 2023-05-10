@@ -1,5 +1,7 @@
+
 import { Component } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { Token } from 'src/app/model/token';
 import { User } from 'src/app/model/user';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -11,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignInComponent {
   constructor(private authService : AuthService){}
 
-  model : User = new User('', '');
+  model : User = new User('', '', '');
   body! : any;
   submitted = false;
   token!: any
@@ -20,9 +22,13 @@ export class SignInComponent {
   connectUser() {
     this.submitted = true
     this.body = this.model;
-    this.authService.login(this.body).subscribe((r: string) => {
-      this.token = r;
-      this.authService.getToken(this.token);
+    this.authService.login(this.body).subscribe((r: Token) => {
+      this.token = r.token;
+      this.authService.setToken(this.token);
+      this.authService.updateIsLoggedIn(true);
+      localStorage.setItem("username", this.model.username)
+      console.log(localStorage.getItem("username ") + this.token)
+
     });
 
   }

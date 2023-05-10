@@ -1,29 +1,29 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Post } from '../model/post';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
-
+data: object = {};
+private dataSubject = new BehaviorSubject<object>(this.data)
+public currentData = this.dataSubject.asObservable();
   constructor(private http: HttpClient) { }
-
-  sendFile(image: File, description: string, username: string) {
+  updateDataSubject(newDatas: object){
+    this.dataSubject.next(newDatas);
+  }
+  sendFile(file: File, description: string, username: string, localisation: string):Observable<object> {
 
     const formData = new FormData();
     formData.append('username', username)
+    formData.append('localisation', localisation)
     formData.append('description', description)
-    formData.append('image', image, image.name);
-    return this.http.post("http://localhost:8080/photos/add", formData);
+    formData.append('file', file);
+    return this.http.post("http://localhost:8080/post/add", formData);
   }
-
-  // getFile(id: number): Observable<HttpResponse<FileModel>> {
-  //   return this.http.get("http://localhost:8080/img/"+id, { observe: 'response'}) as Observable<HttpResponse<FileModel>>;
-  // }
-
-  // getIds(): Observable<number[]>{
-  //   return this.http.get("http://localhost:8080/img/ids") as Observable<number[]>;
-  // }
+  getPosts():Observable<Post[]>{
+    return this.http.get<Post[]>("http://localhost:8080/post/all")
+  }
 }

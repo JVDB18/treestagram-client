@@ -1,0 +1,34 @@
+
+<ng-container class="post-form-container">
+  <div nz-row>
+    <div nz-col nzSpan="12">
+      <h2>New Post</h2>
+      <div>
+               <div *ngIf="imgPreview">
+                   <img [src]="imgPreview" style="width:400px">
+               </div>
+               <br>
+               <label class="label">
+                <input type="file" (change)="onFileChanged($event)">
+                <span>+</span>
+                <br />
+                <span>Ajouter une photo</span>
+               </label>
+               <br>
+               <span>Localisation</span>
+               <input nz-input placeholder="Localisation" [(ngModel)]="loca" />
+               <br />
+               <br />
+               <span>Description</span>
+               <nz-textarea-count placeholder="Description" [nzMaxCharacterCount]="100">
+                  <textarea placeholder="Description"[(ngModel)]="desc" rows="4"  nz-input></textarea>
+               </nz-textarea-count>
+                <br>
+               <button nz-button (click)="onUpload()" class="primary-btn">
+                 <i nz-icon nzType="upload"></i>
+                 Upload
+               </button>
+           </div>
+      </div>
+  </div>
+</ng-container>

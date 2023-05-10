@@ -1,0 +1,44 @@
+
+label.label input[type="file"] {
+  position: absolute;
+  top: -1000px;
+}
+.label {
+  cursor: pointer;
+  border: 1px dashed #4a4a4a;
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin: 5px;
+  background: #dddddd00;
+  display: inline-block;
+}
+.label:hover {
+  background: #404140;
+}
+.label:active {
+  background: #9fa1a0;
+}
+.label:invalid+span {
+  color: #000000;
+}
+.label:valid+span {
+  color: #ffffff;
+}
+::placeholder {
+  color: white;
+  opacity: 1;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: white;
+}
+.primary-btn{
+  color: black;
+}
+.post-form-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.ant-col-12 {
+  margin: auto;
+}

@@ -5,7 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './modules/shared/shared.module';
-import { AddPostComponent } from './modules/shared/Post/add-post/add-post.component';
+import { AddPostComponent } from './modules/post/add-post/add-post.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { fr_FR } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import fr from '@angular/common/locales/fr';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IconsProviderModule } from './icons-provider.module';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+
+registerLocaleData(fr);
 
 @NgModule({
   declarations: [
@@ -15,9 +27,17 @@ import { AddPostComponent } from './modules/shared/Post/add-post/add-post.compon
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzButtonModule
   ],
-  providers: [],
+  providers: [
+    { provide: NZ_I18N, useValue: fr_FR }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
