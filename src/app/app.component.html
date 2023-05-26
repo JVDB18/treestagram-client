@@ -6,16 +6,16 @@
         <!-- <img src="../assets/pics/logo.png" alt="logo" class="logo"> -->
         <h1>Treestagram</h1>
     </div>
-    <div *ngIf="username"><h3>Hello {{username}}</h3></div>
+    <app-logged-in *ngIf="isLoggedIn"></app-logged-in>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
 
           <li nz-menu-item nzMatchRouter>
             <a routerLink="">Feed</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
+          <li nz-menu-item nzMatchRouter *ngIf="isLoggedIn">
             <a routerLink="/profile/{{username}}">Profile</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
+          <li nz-menu-item nzMatchRouter *ngIf="isLoggedIn">
             <a>Settings</a>
           </li>
           <li nz-menu-item nzMatchRouter>

@@ -17,16 +17,26 @@ export class AppComponent implements OnInit{
 
     if(localStorage.getItem('token') !== null){
       this.isLog()
+      this._auth.username$.subscribe(res => {
+        this.setUser();
+        this.username = res;
+      })
     }
   }
-  username: string | null = localStorage.getItem("username");
+  username!: any;
   isCollapsed: boolean = false
   isLoggedIn!: boolean;
+  setUser(){
+    if(this.username){
+      this._auth.setUsername(this.username);
+    }
+  }
   isLog(){
     this._auth.updateIsLoggedIn(true);
   }
   disconnect(){
 
     this._auth.disconnect();
+    this.username = null;
   }
 }

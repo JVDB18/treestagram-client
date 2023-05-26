@@ -26,4 +26,7 @@ public currentData = this.dataSubject.asObservable();
   getPosts():Observable<Post[]>{
     return this.http.get<Post[]>("http://localhost:8080/post/all")
   }
+  getPostsByUsername(username: string | null): Observable<Post[]>{
+    return this.http.get<Post[]>(`http://localhost:8080/post/user/${username}`)
+  }
 }

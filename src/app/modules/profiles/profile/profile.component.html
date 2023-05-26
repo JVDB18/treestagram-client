@@ -1,1 +1,10 @@
-<p>profile works!</p>
+<h1>COUCOU {{username}}</h1>
+<div *ngIf="posts" class="picsContainer">
+  <div *ngFor="let item of posts">
+    <img class = "profile_post" [nzSrc]="item.pictureUrl"
+      nz-image
+      width="200px"
+      height="200px"
+      alt="">
+  </div>
+</div>

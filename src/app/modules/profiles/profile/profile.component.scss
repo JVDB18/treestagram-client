@@ -1,0 +1,10 @@
+.profile_post{
+  width: 200px;
+}
+.picsContainer{
+  display: flex;
+  flex-direction: row;
+  max-width: 100vw;
+  max-height: 100vh;
+  flex-wrap: wrap;
+}

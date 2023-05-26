@@ -2,6 +2,15 @@
 <div class="container">
   <div [hidden]="submitted">
     <h1>Sign in !</h1>
+
+        <nz-alert
+        [hidden]="error == false"
+        nzType="error"
+        nzCloseable
+        nzMessage="Error Text"
+        nzDescription="Error Description Error Description Error Description Error Description Error Description Error Description"
+        (nzOnClose)="afterClose()"
+      ></nz-alert>
     <form (ngSubmit)="connectUser()" #userForm="ngForm">
       <div class="form-group">
         <label for="name">Username</label>
@@ -20,7 +29,8 @@
         <input type='password' class="form-control" id="password"
                required
                [(ngModel)]="model.password" name="password"
-               #password = "ngModel">
+               #password = "ngModel"
+               (keydown.enter)="connectUser()">
                <div [hidden]="password.valid || password.pristine"
                     class="alert alert-danger">
                  Password is required
@@ -31,8 +41,14 @@
     </form>
   </div>
 
-  <div [hidden]="!submitted">
-    <h2>Thanks for signing in {{model.username}}</h2>
-    <button type="button" class="btn btn-primary" (click)="submitted=false; userForm.reset()">Back to Sign up</button>
+   <div [hidden]="!submitted">
+    <nz-alert
+      nzType="success"
+      nzMessage="Thanks for signing"in
+      nzDescription="Let's make a new content"
+      nzShowIcon
+    ></nz-alert>
+    <h2>Hello there {{model.username}}</h2>
+    <button type="button" class="btn btn-primary" (click)="redirectToFeed(); userForm.reset()">Back to Sign up</button>
   </div>
 </div>
